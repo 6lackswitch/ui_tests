@@ -37,7 +37,7 @@ public class ResultForm {
     }
 
     public String getBirthday() {
-        return getDriver().findElement(birthday).getText().replace(",", " ");
+        return getDriver().findElement(birthday).getText();
     }
 
     public String getSubjects() {

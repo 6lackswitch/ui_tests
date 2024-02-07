@@ -1,54 +1,39 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.ui.elements.ResultForm;
-import org.ui.models.Student;
 import org.ui.pages.PracticeFormPage;
 
 public class PracticeFormTest extends BaseTest{
     @Test
     public void registrationFormTest() {
-        Student student = new Student();
-        student.setFirstName("name");
-        student.setLastName("last");
-        student.setEmail("example@example.com");
-        student.setGender("Male");
-        student.setMobile("3454354353");
-        student.setBirthday("14 March 2011");
-        student.setSubjects("English");
-        student.setHobbies("Music");
-        student.setPicturePath(this.getClass().getResource("/cat.jpg").getPath());
-        student.setAddress("Siberia, Forest, Anywhere");
-        student.setState("Haryana");
-        student.setCity("Panipat");
-
         new PracticeFormPage()
-                .setFirstName(student.getFirstName())
-                .setLastName(student.getLastName())
-                .setUserEmail(student.getEmail())
-                .setGender(student.getGender())
-                .setUserNumber(student.getMobile())
-                .setDateOfBirth(student.getBirthday())
-                .setSubject(student.getSubjects())
-                .setHobbie(student.getHobbies())
-                .uploadPicture(student.getPicturePath())
-                .setCurrentAddress(student.getAddress())
-                .setState(student.getState())
-                .setCity(student.getCity())
+                .setFirstName("name")
+                .setLastName("last")
+                .setUserEmail("example@example.com")
+                .setGender("Male")
+                .setUserNumber("3454354353")
+                .setDateOfBirth("14 March 2011")
+                .setSubject("English")
+                .setHobbie("Music")
+                .uploadPicture(this.getClass().getResource("/cat.jpg").getPath())
+                .setCurrentAddress("Siberia, Forest, Anywhere")
+                .setState("Haryana")
+                .setCity("Panipat")
                 .submit();
 
         ResultForm resultForm = new ResultForm();
 
         Assert.assertEquals(resultForm.getTitle(), "Thanks for submitting the form");
 
-        Assert.assertEquals(resultForm.getFullName(), student.getFullName());
-        Assert.assertEquals(resultForm.getEmail(), student.getEmail());
-        Assert.assertEquals(resultForm.getGender(), student.getGender());
-        Assert.assertEquals(resultForm.getNumber(), student.getMobile());
-        Assert.assertEquals(resultForm.getBirthday(), student.getBirthday());
-        Assert.assertEquals(resultForm.getSubjects(), student.getSubjects());
-        Assert.assertEquals(resultForm.getHobbies(), student.getHobbies());
-        Assert.assertEquals(resultForm.getPicture(), student.getPictureName());
-        Assert.assertEquals(resultForm.getAddress(), student.getAddress());
-        Assert.assertEquals(resultForm.getStateAndCity(), student.getStateAndCity());
+        Assert.assertEquals(resultForm.getFullName(), "name last");
+        Assert.assertEquals(resultForm.getEmail(), "example@example.com");
+        Assert.assertEquals(resultForm.getGender(), "Male");
+        Assert.assertEquals(resultForm.getNumber(), "3454354353");
+        Assert.assertEquals(resultForm.getBirthday(), "14 March,2011");
+        Assert.assertEquals(resultForm.getSubjects(), "English");
+        Assert.assertEquals(resultForm.getHobbies(), "Music");
+        Assert.assertEquals(resultForm.getPicture(), "cat.jpg");
+        Assert.assertEquals(resultForm.getAddress(), "Siberia, Forest, Anywhere");
+        Assert.assertEquals(resultForm.getStateAndCity(), "Haryana Panipat");
     }
 }
